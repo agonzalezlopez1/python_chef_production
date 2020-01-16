@@ -8,6 +8,8 @@ Vagrant.configure("2") do |config|
     app.vm.network "private_network", ip: "192.168.10.100"
     app.hostsupdater.aliases = ["development.local"]
     app.vm.synced_folder "app", "/home/ubuntu/app"
-    app.vm.provision "shell", path: "provision.sh"
+    app.vm.provision "chef_solo" do |chef|
+      chef.cookbook_path = ["C:/Users/Cookbooks/It_app"]
+      chef.add_recipe "It_app::default"
   end
 end
